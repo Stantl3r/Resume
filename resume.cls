@@ -1,6 +1,6 @@
 \ProvidesClass{resume}
 
-\LoadClass[11pt,letterpaper]{article} 
+\LoadClass[8pt,letterpaper]{article} 
 
 \usepackage[parfill]{parskip} 
 \usepackage{array} 
