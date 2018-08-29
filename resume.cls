@@ -1,3 +1,5 @@
+%Resume template found overleaf.com
+
 \ProvidesClass{resume}
 
 \LoadClass[8pt,letterpaper]{article} 
@@ -6,23 +8,19 @@
 \usepackage{array} 
 \usepackage{ifthen} 
 
-\pagestyle{empty} % Suppress page numbers
+\pagestyle{empty} 
 
-%----------------------------------------------------------------------------------------
-%	HEADINGS COMMANDS: Commands for printing name and address
-%----------------------------------------------------------------------------------------
 
-\def \name#1{\def\@name{#1}} % Defines the \name command to set name
-\def \@name {} % Sets \@name to empty by default
+\def \name#1{\def\@name{#1}}
+\def \@name {}
 
-\def \addressSep {$\diamond$} % Set default address separator to a diamond
+\def \addressSep {$\diamond$} 
 
-% One, two or three address lines can be specified 
+
 \let \@addressone \relax
 \let \@addresstwo \relax
 \let \@addressthree \relax
 
-% \address command can be used to set the first, second, and third address (last 2 optional)
 \def \address #1{
   \@ifundefined{@addresstwo}{
     \def \@addresstwo {#1}
@@ -34,7 +32,7 @@
   }}
 }
 
-% \printaddress is used to style an address line (given as input)
+
 \def \printaddress #1{
   \begingroup
     \def \\ {\addressSep\ }
@@ -44,7 +42,7 @@
   \addressskip
 }
 
-% \printname is used to print the name as a page header
+
 \def \printname {
   \begingroup
     \hfil{\namesize\bf \@name}\hfil
@@ -52,60 +50,53 @@
   \endgroup
 }
 
-%----------------------------------------------------------------------------------------
-%	PRINT THE HEADING LINES
-%----------------------------------------------------------------------------------------
+
 
 \let\ori@document=\document
 \renewcommand{\document}{
-  \ori@document  % Begin document
-  \printname % Print the name specified with \name
-  \@ifundefined{@addressone}{}{ % Print the first address if specified
+  \ori@document
+  \printname
+  \@ifundefined{@addressone}{}{
     \printaddress{\@addressone}}
-  \@ifundefined{@addresstwo}{}{ % Print the second address if specified
+  \@ifundefined{@addresstwo}{}{
     \printaddress{\@addresstwo}}
-     \@ifundefined{@addressthree}{}{ % Print the third address if specified
+     \@ifundefined{@addressthree}{}{
     \printaddress{\@addressthree}}
 }
 
-%----------------------------------------------------------------------------------------
-%	SECTION FORMATTING
-%----------------------------------------------------------------------------------------
 
-% Defines the rSection environment for the large sections within the CV
-\newenvironment{rSection}[1]{ % 1 input argument - section name
+
+
+\newenvironment{rSection}[1]{ 
   \sectionskip
-  \MakeUppercase{\bf #1} % Section title
+  \MakeUppercase{\bf #1}
   \sectionlineskip
-  \hrule % Horizontal line
-  \begin{list}{}{ % List for each individual item in the section
-    \setlength{\leftmargin}{1.5em} % Margin within the section
+  \hrule
+  \begin{list}{}{ 
+    \setlength{\leftmargin}{1.5em}
   }
   \item[]
 }{
   \end{list}
 }
 
-%----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE FORMATTING
-%----------------------------------------------------------------------------------------
 
-\newenvironment{rSubsection}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
+\newenvironment{rSubsection}[4]{ %
+ {\bf #1} \hfill {#2} 
+ \ifthenelse{\equal{#3}{}}{}{ 
   \\
-  {\em #3} \hfill {\em #4} % Italic job title and location
+  {\em #3} \hfill {\em #4}
   }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
+  \begin{list}{$\cdot$}{\leftmargin=0em}
+   \itemsep -0.5em \vspace{-0.5em} 
   }{
   \end{list}
-  \vspace{0.5em} % Some space after the list of bullet points
+  \vspace{0.5em} 
 }
 
-% The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\namesize{\huge} % Size of the name at the top of the document
-\def\addressskip{\smallskip} % The space between the two address (or phone/email) lines
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section 
-\def\nameskip{\bigskip} % The space after your name at the top
-\def\sectionskip{\medskip} % The space after the heading section
+
+\def\namesize{\huge}
+\def\addressskip{\smallskip}
+\def\sectionlineskip{\medskip} 
+\def\nameskip{\bigskip}
+\def\sectionskip{\medskip}
